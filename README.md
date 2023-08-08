@@ -1,5 +1,6 @@
 Entity Relationship Diagram (ERD)
-![image](https://github.com/dipaferdian/k3i-web-application/assets/8612273/1b3b9d86-93ae-4d87-9a93-7d3124d6b0d3)
+![image](https://github.com/dipaferdian/officer-web-application/assets/8612273/1874a672-9479-4b22-896a-95c7d2fc58ef)
+
 
 Feature :
 
