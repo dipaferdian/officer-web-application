@@ -3,7 +3,8 @@ class OfficersController < ApplicationController
 
   # GET /officers or /officers.json
   def index
-    @officers = Officer.all
+    @officers = Officer.paginate(page: params[:page], per_page: 2).find_by_sql("SELECT id, name FROM officers ORDER BY id asc")
+
   end
 
   # GET /officers/1 or /officers/1.json

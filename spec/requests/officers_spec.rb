@@ -24,11 +24,34 @@ RSpec.describe "/officers", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
+  let(:create_officers) {
+    create_list(:officer, 2)
+  }
+
   describe "GET /index" do
+
+    before do
+      create_officers
+    end
+
+    # i want to expected response like this
+    let(:expected_officer) do
+      create_officers.map do |officer|
+        {
+          id: officer.id,
+          name: officer.name
+        }
+      end.sort_by { |officer| officer[:__id__] }.as_json
+    end
+
     it "renders a successful response" do
-      Officer.create! valid_attributes
-      get officers_url
-      expect(response).to be_successful
+      get "#{officers_path}.json?page=1"
+
+      ap response.parsed_body
+
+      expect(response).to have_http_status(200)
+      expect(response.request.method).to eq("GET")
+      expect(response.parsed_body).to eq(expected_officer)
     end
   end
 
