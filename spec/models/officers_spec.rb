@@ -5,7 +5,7 @@ RSpec.describe Officer, type: :model do
   describe "association" do
 
     let!(:rank) do
-      create(:rank)
+      create(:rank, name: "Anggota")
     end
 
     let!(:officer) do
@@ -14,6 +14,19 @@ RSpec.describe Officer, type: :model do
 
     let!(:rank_officer) do
       create(:rank_officer, rank_id: rank.id, officer_id: officer.id)
+    end
+
+    def rank_type_data(object = {})
+      have_attributes({
+                id: be_a(Integer),
+                name: be_a(String),
+                created_at: be_a(ActiveSupport::TimeWithZone),
+                updated_at: be_a(ActiveSupport::TimeWithZone)
+              }.merge(object))
+    end
+
+    def get_officer
+      Officer.find(officer.id)
     end
 
     it 'has one Rank through RankOfficer' do
@@ -28,7 +41,8 @@ RSpec.describe Officer, type: :model do
 
     it 'should officer have a rank' do
 
-      expect(Officer.find(officer.id).rank).to eq(rank)
+      expect(get_officer.rank).to rank_type_data
+      expect(get_officer.rank).to have_attributes(name: "Anggota")
     end
 
   end
