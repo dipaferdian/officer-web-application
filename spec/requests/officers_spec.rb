@@ -24,19 +24,19 @@ RSpec.describe "/officers", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
-  let(:create_officers) {
+  let(:officers) {
     create_list(:officer, 2)
   }
 
   describe "GET /index" do
 
     before do
-      create_officers
+      officers
     end
 
     # i want to expected response like this
     let(:expected_officer) do
-      create_officers.map do |officer|
+      officers.map do |officer|
         {
           id: officer.id,
           name: officer.name

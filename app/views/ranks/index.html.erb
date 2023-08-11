@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Ranks</h1>
+
+<div id="ranks">
+  <% @ranks.each do |rank| %>
+    <%= render rank %>
+    <p>
+      <%= link_to "Show this rank", rank %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New rank", new_rank_path %>

@@ -2,7 +2,34 @@ require 'rails_helper'
 
 RSpec.describe Officer, type: :model do
 
-  describe 'Officer should' do
+  describe "association" do
+
+    let!(:rank) do
+      create(:rank, name: "Anggota")
+    end
+
+    let!(:officer) do
+      create(:officer)
+    end
+
+    let!(:rank_officer) do
+      create(:rank_officer, rank_id: rank.id, officer_id: officer.id)
+    end
+
+
+    it 'has one Rank' do
+      t = Officer.reflect_on_association(:rank)
+      expect(t.macro).to eq(:has_one)
+    end
+
+    it 'should officer have a rank' do
+
+      expect(Officer.find(officer.id).rank).to eq(rank)
+    end
+
+  end
+
+  describe 'validate input' do
     let(:officer) { create(:officer) }
 
     it 'should be valid when input string with valid input' do
