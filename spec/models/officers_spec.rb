@@ -5,7 +5,7 @@ RSpec.describe Officer, type: :model do
   describe "association" do
 
     let!(:rank) do
-      create(:rank, name: "Anggota")
+      create(:rank)
     end
 
     let!(:officer) do
@@ -16,7 +16,7 @@ RSpec.describe Officer, type: :model do
       create(:rank_officer, rank_id: rank.id, officer_id: officer.id)
     end
 
-
+Petugas
     it 'has one Rank' do
       t = Officer.reflect_on_association(:rank)
       expect(t.macro).to eq(:has_one)
