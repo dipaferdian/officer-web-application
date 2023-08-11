@@ -16,8 +16,13 @@ RSpec.describe Officer, type: :model do
       create(:rank_officer, rank_id: rank.id, officer_id: officer.id)
     end
 
-    it 'has one Rank' do
+    it 'has one Rank through RankOfficer' do
       t = Officer.reflect_on_association(:rank)
+      expect(t.macro).to eq(:has_one)
+    end
+
+    it 'has one RankOfficer' do
+      t = Officer.reflect_on_association(:rank_officer)
       expect(t.macro).to eq(:has_one)
     end
 
