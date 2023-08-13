@@ -4,9 +4,10 @@ RSpec.describe RankOfficer, type: :model do
 
   describe 'association' do
 
-    it 'has one Rank' do
+    it 'belongs_to Rank' do
       t = RankOfficer.reflect_on_association(:rank)
-      expect(t.macro).to eq(:has_one)
+      expect(t.macro).to eq(:belongs_to)
     end
+
   end
 end

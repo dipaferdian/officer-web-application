@@ -28,13 +28,16 @@ RSpec.describe "/officers", type: :request do
     create_list(:officer, 2)
   }
 
+  let(:officer) do
+    create(:officer)
+  end
+
   describe "GET /index" do
 
     before do
       officers
     end
 
-    # i want to expected response like this
     let(:expected_officer) do
       officers.map do |officer|
         {
@@ -47,8 +50,6 @@ RSpec.describe "/officers", type: :request do
     it "renders a successful response" do
       get "#{officers_path}.json?page=1"
 
-      ap response.parsed_body
-
       expect(response).to have_http_status(200)
       expect(response.request.method).to eq("GET")
       expect(response.parsed_body).to eq(expected_officer)
@@ -56,10 +57,24 @@ RSpec.describe "/officers", type: :request do
   end
 
   describe "GET /show" do
+
+    before do
+      officer
+    end
+
+    let(:expected_officer) do
+        {
+          id: officer.id,
+          name: officer.name
+        }.as_json
+      end
+
     it "renders a successful response" do
-      officer = Officer.create! valid_attributes
-      get officer_url(officer)
-      expect(response).to be_successful
+      get officer_url("#{officer.id}.json")
+
+      expect(response).to have_http_status(200)
+      expect(response.request.method).to eq("GET")
+      expect(response.parsed_body).to eq(expected_officer)
     end
   end
 
