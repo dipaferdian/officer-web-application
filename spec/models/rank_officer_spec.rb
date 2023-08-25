@@ -9,5 +9,10 @@ RSpec.describe RankOfficer, type: :model do
       expect(t.macro).to eq(:belongs_to)
     end
 
+    it 'belongs_to Officer' do
+      t = RankOfficer.reflect_on_association(:officer)
+      expect(t.macro).to eq(:belongs_to)
+    end
+
   end
 end

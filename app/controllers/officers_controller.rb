@@ -1,5 +1,5 @@
 class OfficersController < ApplicationController
-  before_action :set_officer, only: %i[ show edit update destroy ]
+  before_action only: %i[ index show create update destroy ]
 
   # GET /officers or /officers.json
   def index
@@ -8,16 +8,7 @@ class OfficersController < ApplicationController
 
   # GET /officers/1 or /officers/1.json
   def show
-    @officer = OfficerServices::OfficerDetail.new(officer: @officer).call
-  end
-
-  # GET /officers/new
-  def new
-    @officer = Officer.new
-  end
-
-  # GET /officers/1/edit
-  def edit
+    @officer = OfficerServices::OfficerDetail.new(officer: __id__ = params[:id]).call
   end
 
   # POST /officers or /officers.json
@@ -59,11 +50,6 @@ class OfficersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_officer
-      @officer = Officer.find(params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
     def officer_params
       params.require(:officer).permit(:name)

@@ -2,7 +2,7 @@
 module OfficerServices
 
   class OfficerDetail < ApplicationService
-    def initialize(officer:)
+    def initialize(officer: __id__ = nil)
       @officer = officer
     end
 
@@ -13,7 +13,7 @@ module OfficerServices
     private
 
     def detail_officer
-      @officer
+     @officer = Officer.find(@officer)
     end
   end
 end
