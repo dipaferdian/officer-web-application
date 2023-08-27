@@ -2,13 +2,35 @@
 
 <h1>Officers</h1>
 
-<div id="officers">
-  <% @officers.each do |officer| %>
-    <%= render officer %>
-    <p>
-      <%= link_to "Show this officer", officer %>
-    </p>
-  <% end %>
-</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Rank</th>
+    <th scope="col">Detail</th>
+  </tr>
+  </thead>
+  <tbody>
+    <div id="officers">
+      <% @officers.each do |officer| %>
+        <tr>
+          <th><%= officer[:id] %></th>
+          <th><%= officer[:name] %></th>
+          <th><%= officer[:id].nil? ? "" : officer[:rank].nil? ? "" : officer[:rank].try(:name) %></th>
+          <th hidden="<%= officer[:id].nil? ? true : false %>"> <% link_to "Detail", "officers/#{officer[:id]}"%></th>
+        </tr>
+       <% end %>
+      <%= link_to "New officer", new_officer_path %>
+    </div>
+  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href=<%= "/#{@officers.last["prev_page"]}" %>>Previous</a></li>
+    <li class="page-item"><a class="page-link" href=<%= "/#{@officers.last["next_page"]}" %>><%= @officers.last["next_number_page"] %></a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 
-<%= link_to "New officer", new_officer_path %>
+

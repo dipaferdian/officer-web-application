@@ -54,6 +54,10 @@ gem "bootsnap", require: false
 # paginate
 gem 'will_paginate'
 
+# Bootstrap
+gem 'bootstrap', '~> 5.3.1'
+gem 'sprockets-rails'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -67,6 +71,7 @@ group :development, :test do
   gem 'rspec-mocks', '~> 3.9.0'
   gem 'rspec-support', '~> 3.9.0'
   gem 'awesome_print', '~> 1.9'
+  gem 'rails-controller-testing'
 end
 
 group :development do
