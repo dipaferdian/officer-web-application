@@ -1,5 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
+<div class="container-md">
+
 <h1>Officers</h1>
 
 <table class="table">
@@ -8,29 +10,37 @@
     <th scope="col">id</th>
     <th scope="col">Name</th>
     <th scope="col">Rank</th>
-    <th scope="col">Detail</th>
+    <th scope="col">Action</th>
   </tr>
   </thead>
   <tbody>
     <div id="officers">
-      <% @officers.each do |officer| %>
-        <tr>
-          <th><%= officer[:id] %></th>
-          <th><%= officer[:name] %></th>
-          <th><%= officer[:id].nil? ? "" : officer[:rank].nil? ? "" : officer[:rank].try(:name) %></th>
-          <th hidden="<%= officer[:id].nil? ? true : false %>"> <% link_to "Detail", "officers/#{officer[:id]}"%></th>
-        </tr>
+      <% @officers[:officers].each do |officer| %>
+        <% unless officer[:id].nil?  %>
+          <tr>
+            <th><%= officer[:id] %></th>
+            <th><%= officer[:name] %></th>
+            <th><%= officer[:id].nil? ? "" : officer[:rank].nil? ? "" : officer[:rank].try(:name) %></th>
+            <% unless officer[:id].nil? %>
+              <th><%=  link_to "Detail", "officers/#{officer[:id]}" %></th>
+            <%  end %>
+          </tr>
        <% end %>
-      <%= link_to "New officer", new_officer_path %>
+      <% end %>
+      <button type="button" class="btn btn-primary" onclick="NewOfficer()">New Officer</button>
     </div>
   </tbody>
 </table>
 <nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" href=<%= "/#{@officers.last["prev_page"]}" %>>Previous</a></li>
-    <li class="page-item"><a class="page-link" href=<%= "/#{@officers.last["next_page"]}" %>><%= @officers.last["next_number_page"] %></a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <li class="page-item"><a class="page-link" href=<%= @officers[:paginate][:next_number_page] == 2 ? "#" : "/#{@officers[:paginate][:prev_page]}" %>>Previous</a></li>
+    <li class="page-item"><a class="page-link" href=<%= @officers[:officers].length <= 1 ? "#" : "/#{@officers[:paginate][:next_page]}" %>>Next</a></li>
   </ul>
 </nav>
+</div>
 
-
+<script>
+  function NewOfficer() {
+      window.open(window.location.origin + "/officers/new", '_blank');
+  }
+</script>

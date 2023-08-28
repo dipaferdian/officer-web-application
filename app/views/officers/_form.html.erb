@@ -11,12 +11,19 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+    <form class="form-inline">
+      <div class="form-group mb-2">
+        <div class="form-group">
+          <%= form.label :name,  style: "display: block" %>
+          <%= form.text_field :name, class: "form-control", id: "formGroupExampleInput",  placeholder: "String" %>
+        </div>
+      </div>
+      <%= form.submit "Create", class: "btn btn-primary" %>
+    </form>
 <% end %>
+
+
+<script>
+  myButton = document.getElementsByName("commit")
+      myButton.classList.add("");
+</script>

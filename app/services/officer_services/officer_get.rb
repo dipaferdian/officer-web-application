@@ -37,12 +37,18 @@ module OfficerServices
         next_page_number = @page.to_i + 2
       end
 
-        @officers << {
-          next_number_page:next_page_number,
-          next_page: "officers?page=#{next_page_number.to_s}",
-          prev_page: "officers?page=#{prev_page_number.to_s}",
-          prev_number_page: prev_page_number
-        }.as_json
+      pagination = {
+        next_number_page:next_page_number,
+        next_page: "officers?page=#{next_page_number.to_s}",
+        prev_page: "officers?page=#{prev_page_number.to_s}",
+        prev_number_page: prev_page_number
+      }
+
+      {
+        officers: @officers,
+        paginate: pagination
+      }
+
     end
   end
 end

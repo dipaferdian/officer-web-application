@@ -4,8 +4,6 @@ class OfficersController < ApplicationController
   # GET /officers
   def index
     @officers = OfficerServices::OfficerGet.new(page: params[:page]).call
-
-    ap @officers
   end
 
   # GET /officers/1
