@@ -34,7 +34,7 @@ RSpec.describe OfficersController, type: :controller do
       get :index, params: { page: 1 }
 
       expect(assigns(:officers)).to include(officers: officer_data_type)
-      expect(assigns(:officers)).to include(paginate: paginate_data_type(:next_number_page => 2))
+      expect(assigns(:officers)).to include(paginate: paginate_data_type(:next_number_page => 2, :prev_number_page => 1))
     end
   end
 end

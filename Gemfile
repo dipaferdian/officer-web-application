@@ -15,6 +15,8 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+gem 'graphql', '~> 2.0', '>= 2.0.26'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -92,3 +94,4 @@ group :test do
   gem "webdrivers"
   gem 'database_cleaner', '1.8.5'
 end
+gem "graphiql-rails", group: :development
