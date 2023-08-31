@@ -20,7 +20,7 @@
           <tr>
             <th><%= officer[:id] %></th>
             <th><%= officer[:name] %></th>
-            <th><%= officer[:id].nil? ? "" : officer[:rank].nil? ? "" : officer[:rank].try(:name) %></th>
+            <th id="<%= officer[:id] %>"><%= officer[:id].nil? ? "" : officer[:rank].nil? ? "" : officer[:rank].try(:name) %></th>
             <% unless officer[:id].nil? %>
               <th><%=  link_to "Detail", "officers/#{officer[:id]}" %></th>
             <%  end %>
