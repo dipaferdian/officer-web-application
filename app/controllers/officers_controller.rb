@@ -17,7 +17,7 @@ class OfficersController < ApplicationController
 
     respond_to do |format|
       if @officer.save
-        format.html { redirect_to officer_url(@officer), notice: "Officer was successfully created." }
+        format.html { redirect_to officer_url(@officer), notice: 'Officer was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -28,7 +28,7 @@ class OfficersController < ApplicationController
   def update
     respond_to do |format|
       if @officer.update(officer_params)
-        format.html { redirect_to officer_url(@officer), notice: "Officer was successfully updated." }
+        format.html { redirect_to officer_url(@officer), notice: 'Officer was successfully updated.' }
         format.json { render :show, status: :ok, location: @officer }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class OfficersController < ApplicationController
     @officer.destroy
 
     respond_to do |format|
-      format.html { redirect_to officers_url, notice: "Officer was successfully destroyed." }
+      format.html { redirect_to officers_url, notice: 'Officer was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -52,8 +52,9 @@ class OfficersController < ApplicationController
   end
 
   private
-    # Only allow a list of trusted parameters through.
-    def officer_params
-      params.require(:officer).permit(:name)
-    end
+
+  # Only allow a list of trusted parameters through.
+  def officer_params
+    params.require(:officer).permit(:name)
+  end
 end
