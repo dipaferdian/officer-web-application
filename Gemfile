@@ -53,6 +53,9 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# gem 'therubyracer', :platforms => :ruby
+# gem 'execjs'
+
 # paginate
 gem 'will_paginate'
 
@@ -66,6 +69,7 @@ group :development, :test do
   gem "rspec"
   gem "factory_bot_rails", '~> 6.1.0'
   gem 'faker'
+  gem 'rubocop', require: false
   gem 'shoulda-matchers', '~> 5.0'
   gem 'rspec-rails', '~> 4.0.1'
   gem 'rspec-core', '~> 3.9.0'
