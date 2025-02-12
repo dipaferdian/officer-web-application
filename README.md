@@ -1,5 +1,6 @@
 Entity Relationship Diagram (ERD)
-![image](https://github.com/dipaferdian/officer-web-application/assets/8612273/e6b0118c-5c29-4dbf-8d0b-4d8c417b5069)
+![police](https://github.com/user-attachments/assets/ac29695c-d67d-4aa6-8853-187ae7817c7c)
+
 
 
 # Requirements
