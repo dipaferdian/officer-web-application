@@ -10,8 +10,12 @@ RSpec.describe OfficersController, type: :controller do
       create(:rank)
     end
 
+    let(:office) { create(:office) }
+
+    let(:vehicle) { create(:vehicle, fuel: 'fosil') }
+
     let!(:officers) do
-      create_list(:officer, 5, rank: rank)
+      create_list(:officer, 5, rank: rank, office: office, vehicle: vehicle)
     end
 
     def paginate_data_type(object ={})

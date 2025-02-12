@@ -93,8 +93,5 @@ RSpec.describe 'CreateOfficer', type: :request do
       expect(response.parsed_body["data"]).to include("createOfficer" => include("officer" => officer_data_type))
       expect(response.parsed_body["data"]).to include("createOfficer" => include("errors" => eq([])))
     end
-
   end
-
-
 end

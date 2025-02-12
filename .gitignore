@@ -38,3 +38,6 @@
 
 # Ruybmine
 .idea
+
+# IRB
+.irb_history
