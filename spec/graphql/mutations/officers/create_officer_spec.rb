@@ -39,6 +39,16 @@ RSpec.describe 'CreateOfficer', type: :request do
       expect(response.parsed_body["data"]).to include("createOfficer" => include("errors" => eq([])))
     end
 
+    it 'should fail to create new officer when name is nil' do
+      post '/graphql', params: { query: mutation(params: { name: nil }) }
+  
+      expect(response).to have_http_status(200)
+      expect(response.request.method).to eq("POST")
+      expect(response.parsed_body["data"]["createOfficer"]).to be_nil
+      expect(response.parsed_body["errors"]).to all(include(
+          "message" => "Failed to create officer"
+      ))
+    end
   end
 
   context 'Create officers with Rank' do
@@ -95,3 +105,4 @@ RSpec.describe 'CreateOfficer', type: :request do
     end
   end
 end
+

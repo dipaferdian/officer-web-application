@@ -12,7 +12,7 @@ module Mutations
       def resolve(name:, rank_id: nil)
         officer = Officer.new(name: name)
 
-        if officer.save
+        return respond_single_error("Failed to create officer") unless officer.save
 
           rank = Rank.find_by(id: rank_id)
 
@@ -24,12 +24,6 @@ module Mutations
             officer: officer,
             errors: []
           }
-        else
-          {
-            officer: nil,
-            errors: officer.errors.full_messages
-          }
-        end
       end
     end
   end

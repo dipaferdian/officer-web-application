@@ -47,12 +47,9 @@ RSpec.describe 'GetOfficer', type: :request do
 
       post '/graphql', params: { query: query(params: { page: 1 } ) }
 
-      ap response.parsed_body["data"]
-
       expect(response).to have_http_status(200)
       expect(response.request.method).to eq("POST")
       expect(response.parsed_body["data"]).to include("officers" => officer_data_type)
     end
-
   end
 end
