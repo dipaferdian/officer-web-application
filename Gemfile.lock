@@ -112,12 +112,16 @@ GEM
     faker (3.2.1)
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
+    fiber-storage (1.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     graphiql-rails (1.9.0)
       railties
       sprockets-rails
-    graphql (2.1.1)
+    graphql (2.4.9)
+      base64
+      fiber-storage
+      logger
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.1)
@@ -132,6 +136,7 @@ GEM
       activesupport (>= 5.0.0)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
+    logger (1.6.5)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -266,6 +271,7 @@ GEM
       websocket (~> 1.0)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
+    spring (4.2.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -335,6 +341,7 @@ DEPENDENCIES
   rubocop
   selenium-webdriver
   shoulda-matchers (~> 5.0)
+  spring
   sprockets-rails
   stimulus-rails
   turbo-rails
