@@ -4,7 +4,7 @@ Entity Relationship Diagram (ERD)
 
 
 # Requirements
-- Ruby 3.1.2
+- Ruby 3.2.4
 
 # How to setup database
 1. rails db:create
