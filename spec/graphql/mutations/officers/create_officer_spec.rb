@@ -4,43 +4,51 @@ require 'rails_helper'
 
 RSpec.describe 'CreateOfficer', type: :request do
 
-  context 'Create officers' do
+  let(:rank) { create(:rank) }
 
-    def mutation(params: { name: nil } )
-      <<~GRAPHQL
-          mutation {
-            createOfficer(input: {
-              name: "#{params[:name]}"
-          }){
-          officer{
-             id,
-             name
-          },
-          errors
-          }
-        }
-      GRAPHQL
-    end
+  context 'Create officers' do
 
     def officer_data_type(object = {})
       ({
                 "id" => be_a(Integer),
-                "name" => be_a(String)
+                "name" => be_a(String),
+                "rank" => include("id" => be_a(Integer))
               }.merge(object))
     end
 
     it 'should return new officer' do
 
-      post '/graphql', params: { query: mutation(params: { name: Faker::Name.name } ) }
+      variables = {
+        input: {
+          name: Faker::Name.name,
+          rankId: rank.id
+        }
+      }
+
+      post '/graphql', params: { query: query, variables: variables }
 
       expect(response).to have_http_status(200)
       expect(response.request.method).to eq("POST")
-      expect(response.parsed_body["data"]).to include("createOfficer" => include("officer" => officer_data_type))
-      expect(response.parsed_body["data"]).to include("createOfficer" => include("errors" => eq([])))
+      expect(response.parsed_body["data"]["createOfficer"]).to include("officer" => officer_data_type)
+      expect(response.parsed_body["data"]["createOfficer"]["officer"]).to include({
+        "name" => variables[:input][:name],
+        "rank" => include({
+          "id" => rank.id,
+          "name" => rank.name
+        })
+      })
+      expect(response.parsed_body["data"]["createOfficer"]).to include("errors" => be_nil)
     end
 
-    it 'should fail to create new officer when name is nil' do
-      post '/graphql', params: { query: mutation(params: { name: nil }) }
+    it 'should fail to create new officer when name is empty value' do
+      variables = {
+        input: {
+          name: "",
+          rankId: ""
+        }
+      }
+
+      post '/graphql', params: { query: query, variables: variables }
   
       expect(response).to have_http_status(200)
       expect(response.request.method).to eq("POST")
@@ -51,58 +59,26 @@ RSpec.describe 'CreateOfficer', type: :request do
     end
   end
 
-  context 'Create officers with Rank' do
+  private
 
-    let(:rank) do
-      create(:rank)
-    end
-
-    def mutation(params: { name: nil, rank_id: nil } )
-      <<~GRAPHQL
-          mutation {
-            createOfficer(input: {
-              name: "#{params[:name]}",
-              rankId: #{params[:rank_id]}
-          }){
-          officer{
-             id,
-             name,
-             rank {
-                id,
-                name
-             }   
-          },
-          errors
+  def query
+    <<~GRAPHQL
+    mutation createOfficer($input: CreateOfficerInput!){
+      createOfficer(input: $input){
+        officer{
+          id
+          name
+          rank{
+            id
+            name
           }
+        },
+        errors{
+          path
+          detail
         }
-      GRAPHQL
-    end
-
-    def rank_data_type(object = {})
-      include({
-                "id" => be_a(Integer),
-                "name" => be_a(String)
-              }.merge(object))
-    end
-
-    def officer_data_type(object = {})
-      ({
-        "id" => be_a(Integer),
-        "name" => be_a(String),
-        "rank" => rank_data_type
-      }.merge(object))
-    end
-
-
-    it 'should return new officer with rank relation' do
-
-      post '/graphql', params: { query: mutation(params: { name: Faker::Name.name, rank_id: rank.id } ) }
-
-      expect(response).to have_http_status(200)
-      expect(response.request.method).to eq("POST")
-      expect(response.parsed_body["data"]).to include("createOfficer" => include("officer" => officer_data_type))
-      expect(response.parsed_body["data"]).to include("createOfficer" => include("errors" => eq([])))
-    end
+      }
+    }
+    GRAPHQL
   end
 end
-

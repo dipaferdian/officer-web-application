@@ -13,6 +13,15 @@ Entity Relationship Diagram (ERD)
 1. Clone this repository
 2. Run `bundle`
 
+### Run rails console
+```
+bundle exec rails c
+```
+### Run debug mode
+```
+bundle exec rdbg --open -n -c -- bundle exec rails s
+```
+
 # How to run test
 1. Run `rspec`
 

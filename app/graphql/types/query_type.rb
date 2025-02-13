@@ -7,7 +7,7 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :officers, [Types::Officers::OfficerType], 'Get Officer by page params' do
+    field :officers, [Types::OfficerType], 'Get Officer by page params' do
       argument :page, Integer
     end
 

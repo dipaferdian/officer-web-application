@@ -3,13 +3,12 @@
 module Mutations
   module Officers
     class CreateOfficer < BaseMutation
+      field :officer, Types::OfficerType, null: false
+      
       argument :name, String, required: true
-      argument :rank_id, Integer, required: false
-
-      field :officer, Types::Officers::OfficerType, null: false
-      field :errors, [String], null: false
-
-      def resolve(name:, rank_id: nil)
+      argument :rank_id, ID, required: false
+      
+      def resolve(name:, rank_id:)
         officer = Officer.new(name: name)
 
         return respond_single_error("Failed to create officer") unless officer.save
@@ -21,8 +20,7 @@ module Mutations
           end
 
           {
-            officer: officer,
-            errors: []
+            officer: officer
           }
       end
     end
