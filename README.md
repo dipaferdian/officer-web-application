@@ -1,6 +1,9 @@
 # Product Requirement Document (PRD)
 [Product Document](https://dipaferdian.atlassian.net/wiki/external/ODlkYzg2NjAyYmJjNGYxM2JhZTU0MDJhYWI5MmRlOWE)
 
+# Technical Documentation (TD)
+[Technical Document](https://docs.google.com/document/d/17t2_rEHpuua3Osfm3sArqFKbbXne-qb_LLGzaJgCMQU/edit?tab=t.0)
+
 # Branching
  ![branch-police](https://github.com/user-attachments/assets/af247712-5ca7-4f4a-8134-5d30bf104442)
 
