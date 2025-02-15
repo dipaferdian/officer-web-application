@@ -1,11 +1,5 @@
-# Product Requirement Document (PRD)
-## [Link](https://dipaferdian.atlassian.net/wiki/external/ODlkYzg2NjAyYmJjNGYxM2JhZTU0MDJhYWI5MmRlOWE)
-
-# Technical Documentation (TD)
-## [Link](https://docs.google.com/document/d/17t2_rEHpuua3Osfm3sArqFKbbXne-qb_LLGzaJgCMQU/edit?tab=t.0)
-
-# Kanban
-## [Link](https://trello.com/b/BDeBnsB5/police)
+# Branching Strategy
+## [Link](https://app.diagrams.net/#G1A4SLDykHER_TeS9XZ-wGSKnnSbQnPsOD#%7B%22pageId%22%3A%22YKSsmgDAc7VQxn2KZzKY%22%7D)
 
 # Entity Relationship Diagram (ERD)
 ## [Link](https://drive.google.com/file/d/1RruRSZWxAaBvAXzzNE1Mmgf4bEBCoWMO/view?usp=sharing)
