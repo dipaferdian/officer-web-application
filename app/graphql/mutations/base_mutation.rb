@@ -6,6 +6,22 @@ module Mutations
     # object_class Types::BaseObject
     field :errors, [Types::ErrorType], null: true
 
+    def authenticate_user!
+      raise GraphQL::ExecutionError, 'You are not authorized' unless current_user
+    end
+
+    def authenticate_admin!
+      raise GraphQL::ExecutionError, 'You are not authorized' unless current_admin
+    end
+
+    def current_user
+      context[:current_user]
+    end
+
+    def current_admin
+      context[:current_admin]
+    end
+
     def respond_with_errors(resource)
       { errors: construct_error_messages(resource) }
     end

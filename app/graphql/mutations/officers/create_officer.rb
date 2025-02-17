@@ -9,6 +9,8 @@ module Mutations
       argument :rank_id, ID, required: false
       
       def resolve(name:, rank_id:)
+        authenticate_admin!
+        
         officer = Officer.new(name: name)
 
         return respond_single_error("Failed to create officer") unless officer.save

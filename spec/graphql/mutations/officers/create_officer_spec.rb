@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'CreateOfficer', type: :request do
 
+  let(:user) { create(:user, is_admin: true) }
   let(:rank) { create(:rank) }
 
   context 'Create officers' do
@@ -25,7 +26,7 @@ RSpec.describe 'CreateOfficer', type: :request do
         }
       }
 
-      post '/graphql', params: { query: query, variables: variables }
+      post '/graphql', params: { query: query, variables: variables }, headers: header(user)
 
       expect(response).to have_http_status(200)
       expect(response.request.method).to eq("POST")
@@ -48,7 +49,7 @@ RSpec.describe 'CreateOfficer', type: :request do
         }
       }
 
-      post '/graphql', params: { query: query, variables: variables }
+      post '/graphql', params: { query: query, variables: variables }, headers: header(user)
   
       expect(response).to have_http_status(200)
       expect(response.request.method).to eq("POST")
@@ -56,6 +57,25 @@ RSpec.describe 'CreateOfficer', type: :request do
       expect(response.parsed_body["errors"]).to all(include(
           "message" => "Failed to create officer"
       ))
+    end
+
+    it 'should fail to create when unauthenticated' do
+
+      variables = {
+        input: {
+          name: Faker::Name.name,
+          rankId: rank.id
+        }
+      }
+
+      post '/graphql', params: { query: query, variables: variables }
+    
+      expect(response).to have_http_status(200)
+      expect(response.request.method).to eq("POST")
+      expect(response.parsed_body["data"]["createOfficer"]).to be_nil
+      expect(response.parsed_body["errors"]).to all(include(
+        "message" => "You are not authorized"
+      ))    
     end
   end
 
@@ -82,3 +102,5 @@ RSpec.describe 'CreateOfficer', type: :request do
     GRAPHQL
   end
 end
+
+
